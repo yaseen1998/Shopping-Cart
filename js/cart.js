@@ -6,7 +6,7 @@ const table = document.getElementById('cart');
 table.addEventListener('click', removeItemFromCart);
 let cart;
 let tbody = document.querySelector('tbody')
-  var c = tbody.childNodes.length;
+  let c ;
 function loadCart() {
   const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
   cart = new Cart(cartItems);
@@ -58,23 +58,25 @@ function showCart() {
 
 }
 
-console.log(c)
+
 function removeItemFromCart(event) {
   console.log(c)
-for (c;c!=1;c--){
+
+  console.log(event.target.id)
+  
+  
     if(rem.includes(event.target.id)){
     let i = rem.indexOf(event.target.id)
-    console.log(i)
-  tbody.removeChild(tbody.childNodes[i])
+    rem.splice(i,1)
+    table.deleteRow(i+1)
+    console.log(rem)
   cart.removeItem(i)
-  console.log(cart)
   cart.saveToLocalStorage()
   
-     }}
-     if(rem.includes(event.target.id)){
-     tbody.removeChild(tbody.firstChild);}
+     }
+    
   }
-    // tbody.removeChild(tbody.firstChild);
+    
 
   
 

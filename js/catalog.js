@@ -3,8 +3,9 @@
 let coun = 0
 
 // Set up an empty cart for use on this page.
-const cart = new Cart([]);
-console.log('cart');
+const cart = new Cart(JSON.parse(localStorage.getItem('cart')) || []);
+console.log(cart)
+let Contents = document.getElementById('cartContents');
 
 // On screen load, we call this method to put all of the busmall options
 // (the things in the Product.allProducts array) into the drop down list.
@@ -17,9 +18,16 @@ function populateForm() {
         selectElement.appendChild(optionItem);
         optionItem.textContent = Product.allProducts[i].name;
     }
+        for (let i = 0; i< cart.items.length;i++){
+            console.log("hello")
+        let li2 = document.createElement('li');
+        li2.innerHTML = `you pick ${cart.items[i].product} and your quantity  ${cart.items[i].quantity}`;
+        Contents.appendChild(li2);
+        coun ++
+        }
+    
 
 }
-
 
 let item = []
 // When someone submits the form, we need to add the selected item to the cart
@@ -65,7 +73,7 @@ function updateCartPreview() {
   
     // TODO: Get the item and quantity from the form
     // TODO: Add a new element to the cartContents div with that information
-    let Contents = document.getElementById('cartContents');
+    
     let li = document.createElement('li');
     li.innerHTML = `you pick ${item[0]} and your quantity  ${item[1]}`;
     Contents.appendChild(li);
